@@ -1,7 +1,7 @@
 {
-  "name": "@enfo/shake-step-function",
+  "name": "@enfo/shake-state-machine",
   "version": "0.0.1",
-  "description": "NPM package for shaking an AWS step function removing unused states",
+  "description": "NPM package for shaking an AWS State Machine removing unused states",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,7 +15,10 @@
     "step-function",
     "step",
     "function",
-    "rerun"
+    "rerun",
+    "state-machine",
+    "state",
+    "machine"
   ],
   "author": "Urban Pettersson",
   "license": "MIT",
