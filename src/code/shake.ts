@@ -1,7 +1,8 @@
 import { readSync, writeSync } from 'clipboardy'
 
-import { State, StateMachine } from '@models/stateMachine'
 import { Graph } from './graph'
+
+import { State, StateMachine } from '@models/stateMachine'
 
 export class StateMachineShaker {
   private startState: string;
@@ -40,12 +41,12 @@ export class StateMachineShaker {
       StartAt: this.startState,
       States: {}
     }
-    Object.entries(this.stateMachine).forEach(([key, value]: [string, State]): void => {
+    Object.entries(this.stateMachine.States).forEach(([key, value]: [string, State]): void => {
       if (!visited.has(key)) {
         return
       }
       stateMachine.States[key] = value
     })
-    return this.stateMachine
+    return stateMachine
   }
 }
