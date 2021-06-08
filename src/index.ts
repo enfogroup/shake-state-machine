@@ -1,4 +1,4 @@
-import { StepFunctionShaker } from './code/shake'
+import { StateMachineShaker } from './code/shake'
 
-const shaker = new StepFunctionShaker()
+const shaker = new StateMachineShaker()
 shaker.shake()

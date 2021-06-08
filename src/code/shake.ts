@@ -1,14 +1,15 @@
-import { readSync } from 'clipboardy'
+import { readSync, writeSync } from 'clipboardy'
 
-import { StateMachine } from "@models/shake";
+import { State, StateMachine } from '@models/stateMachine'
+import { Graph } from './graph'
 
-export class StepFunctionShaker {
+export class StateMachineShaker {
   private startState: string;
   private stateMachine: StateMachine;
 
-  constructor() {
+  constructor () {
     try {
-      this.stateMachine = JSON.parse(readSync())
+      this.stateMachine = this.readFromClipboard()
       this.startState = this.stateMachine.StartAt
     } catch (err) {
       console.log(err)
@@ -20,6 +21,31 @@ export class StepFunctionShaker {
   }
 
   public shake = () => {
+    const graph = new Graph(this.stateMachine)
+    const visited = graph.dfs(this.startState)
+    const newStateMachine = this.shakeStateMachine(visited)
+    this.writeToClipboard(newStateMachine)
+  }
 
+  private readFromClipboard = (): StateMachine => {
+    return JSON.parse(readSync())
+  }
+
+  private writeToClipboard = (stateMachine: StateMachine): void => {
+    writeSync(JSON.stringify(stateMachine))
+  }
+
+  private shakeStateMachine = (visited: Set<string>): StateMachine => {
+    const stateMachine: StateMachine = {
+      StartAt: this.startState,
+      States: {}
+    }
+    Object.entries(this.stateMachine).forEach(([key, value]: [string, State]): void => {
+      if (!visited.has(key)) {
+        return
+      }
+      stateMachine.States[key] = value
+    })
+    return this.stateMachine
   }
 }
