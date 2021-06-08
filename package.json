@@ -4,6 +4,7 @@
   "description": "NPM package for shaking an AWS State Machine removing unused states",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npx husky install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
