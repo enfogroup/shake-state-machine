@@ -1,0 +1,26 @@
+{
+  "name": "@enfo/shake-step-function",
+  "version": "0.0.1",
+  "description": "NPM package for shaking an AWS step function removing unused states",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enfogroup/shake-step-function.git"
+  },
+  "keywords": [
+    "aws",
+    "step-function",
+    "step",
+    "function",
+    "rerun"
+  ],
+  "author": "Urban Pettersson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/enfogroup/shake-step-function/issues"
+  },
+  "homepage": "https://github.com/enfogroup/shake-step-function#readme"
+}
