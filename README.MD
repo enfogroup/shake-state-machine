@@ -38,7 +38,7 @@ npx @enfo/shake-state-machine
 
 ![Just World](https://github.com/enfogroup/shake-state-machine/blob/master/media/fixed.png)
 
-The new state machine definition is ready to be used!
+The new state machine definition is ready to be used. When used in the wild you can have your State Machine fixed in a matter of seconds!
 
 ## How it works
 
