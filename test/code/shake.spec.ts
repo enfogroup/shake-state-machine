@@ -105,5 +105,25 @@ describe('code/shake', () => {
       })
       checkAllMocksCalled(mocks, 1)
     })
+
+    it('should catch errors from underlying operations', () => {
+      const stateMachine: StateMachine = {
+        StartAt: 'B',
+        States: {
+          A: {
+            Type: 'Pass',
+            Next: 'B'
+          }
+        }
+      }
+      const mocks = [
+        jest.spyOn(clipboardy, 'readSync').mockReturnValue(JSON.stringify(stateMachine))
+      ]
+
+      const shaker = new StateMachineShaker()
+
+      expect(() => { shaker.shake() }).toThrow('went wrong shaking')
+      checkAllMocksCalled(mocks, 1)
+    })
   })
 })
