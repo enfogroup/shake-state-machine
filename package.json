@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "npx husky install",
     "build": "npx webpack",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx jest --runInBand",
     "lint": "npx eslint src/**/*.ts",
     "lint:fix": "npx eslint --fix src/**/*.ts"
   },
