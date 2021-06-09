@@ -29,19 +29,19 @@ export class Graph {
       throw new Error(`Unable to find state ${currentState}`)
     }
     this.visited.add(currentState)
-    const neighbours = this.getNeighbours(state)
-    this.processNeighbours(neighbours)
+    const transitions = this.getTransitions(state)
+    this.processTransitions(transitions)
     return this.visited
   }
 
   /**
-   * Returns a list of downstream neighbours of the current state
+   * Returns a list of downstream transitions of the current state
    * @param state
    * AWS State machine state
    * @returns
-   * Array of downstream neighbours
+   * Array of downstream transitions
    */
-  private getNeighbours = (state: State): string[] => {
+  private getTransitions = (state: State): string[] => {
     switch (state.Type) {
       case 'Fail':
       case 'Succeed':
@@ -49,9 +49,9 @@ export class Graph {
       case 'Task':
       case 'Parallel':
       case 'Map':
-        return this.getNeighboursFromBasicState(state)
+        return this.getTransitionsFromBasicState(state)
       case 'Choice':
-        return this.getNeighboursFromChoiceType(state)
+        return this.getTransitionsFromChoiceType(state)
       case 'Wait':
       case 'Pass':
         return [state.Next]
@@ -61,13 +61,13 @@ export class Graph {
   }
 
   /**
-   * Returns a list of neighbours from states where Next is always defined
+   * Returns a list of transitions from states where Next is always defined
    * @param state
    * StateBasic instance
    * @returns
-   * Array of downstream neighbours
+   * Array of downstream transitions
    */
-  private getNeighboursFromBasicState = (state: StateBasic): string[] => {
+  private getTransitionsFromBasicState = (state: StateBasic): string[] => {
     if (state.Next) {
       return [state.Next]
     }
@@ -75,13 +75,13 @@ export class Graph {
   }
 
   /**
-   * Returns a list of neighbours from StateChoice
+   * Returns a list of transitions from StateChoice
    * @param state
    * StateChoice instance
    * @returns
-   * Array of downstream neighbours
+   * Array of downstream transitions
    */
-  private getNeighboursFromChoiceType = (state: StateChoice): string[] => {
+  private getTransitionsFromChoiceType = (state: StateChoice): string[] => {
     const response: string[] = state.Choices.reduce((acc: string[], choice: StateNextSet) => {
       acc.push(choice.Next)
       return acc
@@ -94,15 +94,15 @@ export class Graph {
 
   /**
    * Runs DFS on a list of states
-   * @param neighbours
+   * @param transitions
    * Array of states
    */
-  private processNeighbours = (neighbours: string[]): void => {
-    for (const neighbour of neighbours) {
-      if (this.visited.has(neighbour)) {
+  private processTransitions = (transitions: string[]): void => {
+    for (const transition of transitions) {
+      if (this.visited.has(transition)) {
         return
       }
-      this.dfs(neighbour)
+      this.dfs(transition)
     }
   }
 }
