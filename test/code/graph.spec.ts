@@ -56,6 +56,10 @@ describe('code/graph', () => {
           },
           B: {
             Type: 'Task',
+            Next: 'C'
+          },
+          C: {
+            Type: 'Task',
             End: true
           }
         }
@@ -64,7 +68,7 @@ describe('code/graph', () => {
       const graph = new Graph(input)
       const output = graph.dfs('B')
 
-      expect(output).toEqual(new Set(['B']))
+      expect(output).toEqual(new Set(['B', 'C']))
     })
 
     it('should handle Map state', () => {
