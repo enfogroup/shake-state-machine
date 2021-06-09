@@ -20,15 +20,15 @@ npx @enfo/shake-state-machine
 
 Let us have a look at an AWS State Machine definition.
 
-![Hello World State Machine](./media/helloworld.png)
+![Hello World State Machine](https://github.com/enfogroup/shake-state-machine/blob/master/media/helloworld.png)
 
 Execution is successful.
 
-![Successful execution](./media/execution.png)
+![Successful execution](https://github.com/enfogroup/shake-state-machine/blob/master/media/execution.png)
 
-Let us try to modify the State Machine so it skips the Hello state and starts at World.
+Let us try to modify the State Machine so it skips the Hello state and starts at World. Attempting to save will result in an error regarding an unreachable state.
 
-![State "Hello" is not reachable](./media/broken.png)
+![State "Hello" is not reachable](https://github.com/enfogroup/shake-state-machine/blob/master/media/broken.png)
 
 Copy the definition into your clipboard and run the package. Paste to the definition input field afterwards
 
@@ -36,7 +36,9 @@ Copy the definition into your clipboard and run the package. Paste to the defini
 npx @enfo/shake-state-machine
 ```
 
-![Just World](./media/fixed.png)
+![Just World](https://github.com/enfogroup/shake-state-machine/blob/master/media/fixed.png)
+
+The new state machine definition is ready to be used!
 
 ## How it works
 
