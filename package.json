@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/enfogroup/shake-step-function.git"
+    "url": "git+https://github.com/enfogroup/shake-state-machine.git"
   },
   "keywords": [
     "aws",
@@ -29,9 +29,9 @@
   "author": "Urban Pettersson",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/enfogroup/shake-step-function/issues"
+    "url": "https://github.com/enfogroup/shake-state-machine/issues"
   },
-  "homepage": "https://github.com/enfogroup/shake-step-function#readme",
+  "homepage": "https://github.com/enfogroup/shake-state-machine#readme",
   "dependencies": {
     "clipboardy": "^2.3.0"
   },
