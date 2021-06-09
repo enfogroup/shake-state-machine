@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "NPM package for shaking an AWS State Machine removing unused states",
   "main": "index.js",
+  "bin": {
+    "@enfo/shake-state-machine": "./index.js"
+  },
   "scripts": {
     "postinstall": "npx husky install",
     "prepublishOnly": "npx pinst --disable",
