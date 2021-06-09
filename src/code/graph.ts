@@ -1,4 +1,4 @@
-import { State, StateBasic, StateChoice, StateMachine, StateNextSet } from '@models/stateMachine'
+import { State, StateBase, StateChoice, StateMachine, StateNextSet } from '@models/stateMachine'
 
 /**
  * Graph class with knowledge about AWS State Machines
@@ -49,12 +49,11 @@ export class Graph {
       case 'Task':
       case 'Parallel':
       case 'Map':
+      case 'Wait':
+      case 'Pass':
         return this.getTransitionsFromBasicState(state)
       case 'Choice':
         return this.getTransitionsFromChoiceType(state)
-      case 'Wait':
-      case 'Pass':
-        return [state.Next]
       default:
         throw new Error('Unknown state type')
     }
@@ -67,7 +66,7 @@ export class Graph {
    * @returns
    * Array of downstream transitions
    */
-  private getTransitionsFromBasicState = (state: StateBasic): string[] => {
+  private getTransitionsFromBasicState = (state: StateBase): string[] => {
     if (state.Next) {
       return [state.Next]
     }

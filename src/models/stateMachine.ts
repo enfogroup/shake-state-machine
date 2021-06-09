@@ -17,7 +17,7 @@ export interface StateMachine {
 /**
  * Abstract state which may or may not be the end state.
  */
-export interface StateBasic {
+export interface StateBase {
   /**
    * Next state to transition to
    */
@@ -41,21 +41,21 @@ export interface StateNextSet {
 /**
  * https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-task-state.html
  */
-export interface StateTask extends StateBasic {
+export interface StateTask extends StateBase {
   Type: 'Task'
 }
 
 /**
  * https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-parallel-state.html
  */
-export interface ParallelState extends StateBasic {
+export interface ParallelState extends StateBase {
   Type: 'Parallel';
 }
 
 /**
  * https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-map-state.html
  */
-export interface MapState extends StateBasic {
+export interface MapState extends StateBase {
   Type: 'Map';
 }
 
@@ -91,14 +91,14 @@ export interface StateSucceed {
 /**
  * https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-wait-state.html
  */
-export interface StateWait extends StateNextSet {
+export interface StateWait extends StateBase {
   Type: 'Wait';
 }
 
 /**
  * https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-pass-state.html
  */
-export interface StatePass extends StateNextSet {
+export interface StatePass extends StateBase {
   Type: 'Pass'
 }
 
