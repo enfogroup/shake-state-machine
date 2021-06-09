@@ -5,7 +5,7 @@
 ## Usage
 
 ```sh
-npm i @enfo/shake-state-machine --save-dev
+npm i @enfo/shake-state-machine -g
 ```
 
 Add a state machine definition to your clipboard with your desired start state as StartAt. Invoke the package and if all went well your clipboard will now contain a state machine with no unreachable states.
