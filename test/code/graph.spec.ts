@@ -236,8 +236,41 @@ describe('code/graph', () => {
       expect(output).toEqual(new Set(['B', 'C']))
     })
 
-    it('should handle complex graph', () => {
+    it('should handle complex graph with cycles', () => {
+      const input: StateMachine = {
+        StartAt: 'A',
+        States: {
+          A: {
+            Type: 'Task',
+            Next: 'B'
+          },
+          B: {
+            Type: 'Choice',
+            Choices: [
+              {
+                Next: 'C'
+              }
+            ],
+            Default: 'D'
+          },
+          C: {
+            Type: 'Wait',
+            Next: 'E'
+          },
+          D: {
+            Type: 'Pass',
+            Next: 'B'
+          },
+          E: {
+            Type: 'Succeed'
+          }
+        }
+      }
 
+      const graph = new Graph(input)
+      const output = graph.dfs('B')
+
+      expect(output).toEqual(new Set(['B', 'C', 'D', 'E']))
     })
 
     it('should throw if an invalid state type was found', () => {
