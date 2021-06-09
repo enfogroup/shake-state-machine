@@ -6,6 +6,7 @@
   "scripts": {
     "postinstall": "npx husky install",
     "prepublishOnly": "npx pinst --disable",
+    "publish:package": "cd .dist && npm publish",
     "postpublish": "npx pinst --enable",
     "build": "npx webpack",
     "test": "npx jest --runInBand",
