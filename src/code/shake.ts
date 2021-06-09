@@ -4,10 +4,16 @@ import { Graph } from './graph'
 
 import { State, StateMachine } from '@models/stateMachine'
 
+/**
+ * Class capable of shaking AWS State Machine
+ */
 export class StateMachineShaker {
   private startState: string;
   private stateMachine: StateMachine;
 
+  /**
+   * Creates a new StateMachineShaker reading necessary data from the user's clipboard
+   */
   constructor () {
     try {
       this.stateMachine = this.readFromClipboard()
@@ -22,21 +28,43 @@ export class StateMachineShaker {
   }
 
   public shake = () => {
-    const graph = new Graph(this.stateMachine)
-    const visited = graph.dfs(this.startState)
-    const newStateMachine = this.shakeStateMachine(visited)
-    this.writeToClipboard(newStateMachine)
+    try {
+      const graph = new Graph(this.stateMachine)
+      const visited = graph.dfs(this.startState)
+      const newStateMachine = this.removeUnusedStates(visited)
+      this.writeToClipboard(newStateMachine)
+    } catch (err) {
+      console.log(err)
+      throw new Error('Something went wrong shaking state machine')
+    }
   }
 
+  /**
+   * Reads data from user's clipboard
+   * @returns
+   * Unknown object which we assume is a StateMachine
+   */
   private readFromClipboard = (): StateMachine => {
     return JSON.parse(readSync())
   }
 
+  /**
+   * Writes a StateMachine to user's clipboard
+   * @param stateMachine
+   * StateMachine instance
+   */
   private writeToClipboard = (stateMachine: StateMachine): void => {
     writeSync(JSON.stringify(stateMachine))
   }
 
-  private shakeStateMachine = (visited: Set<string>): StateMachine => {
+  /**
+   * Removes unused states from the in memory State Machine
+   * @param visited
+   * Set with visited states
+   * @returns
+   * New state machine with unused states removed
+   */
+  private removeUnusedStates = (visited: Set<string>): StateMachine => {
     const stateMachine: StateMachine = {
       StartAt: this.startState,
       States: {}
