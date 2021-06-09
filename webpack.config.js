@@ -2,6 +2,7 @@ const path = require('path')
 const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
+const { BannerPlugin } = require('webpack')
 
 module.exports = {
   context: __dirname,
@@ -44,6 +45,7 @@ module.exports = {
           to: '.'
         }
       ]
-    })
+    }),
+    new BannerPlugin({ banner: '#!/usr/bin/env node', raw: true })
   ]
 }
