@@ -1,6 +1,8 @@
 /* eslint-disable no-new */
 // to be tested
 import { StateMachineShaker } from '@code/shake'
+
+// models
 import { StateMachine } from '@models/stateMachine'
 
 // to be mocked
